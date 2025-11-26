@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Deal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int dealId;
 
     @NotNull
     @Size(min = 3, max=3)
