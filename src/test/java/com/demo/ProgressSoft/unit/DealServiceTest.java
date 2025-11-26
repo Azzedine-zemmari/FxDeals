@@ -30,11 +30,10 @@ public class DealServiceTest {
         deal.setId(1L);
         deal.setAmount(220.1);
         deal.setTimestamp(LocalDateTime.now());
-        deal.setDealUniqueId("azzedinezemmari@1");
         deal.setFromCurrency("USA");
         deal.setToCurrency("EUR");
 
-        when(dealRepository.existsByDealUniqueId(deal.getDealUniqueId())).thenReturn(false);
+        when(dealRepository.existsById(deal.getId())).thenReturn(false);
         when(dealRepository.save(any(Deal.class))).thenReturn(deal);
 
         String result = dealService.importDeal(deal);
@@ -42,5 +41,6 @@ public class DealServiceTest {
         assertEquals("Deal imported successfully" , result);
         verify(dealRepository,times(1)).save(deal);
     }
+//    public void testImportDeal_
 
 }

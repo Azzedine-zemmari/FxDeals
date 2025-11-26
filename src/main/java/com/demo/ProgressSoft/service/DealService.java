@@ -25,23 +25,25 @@ public class DealService implements DealServiceInterface{
             if (deal.getTimestamp() == null) {
                 deal.setTimestamp(LocalDateTime.now());
             }
-            if (deal.getDealUniqueId() == null || deal.getDealUniqueId().isEmpty()) {
-                deal.setDealUniqueId(generateDealUniquId(deal));
+            if (deal.getId() == null) {
+               logger.error("You have to insert the id ");
             }
-            if(dealRepository.existsByDealUniqueId(deal.getDealUniqueId())){
-                logger.info("Duplicate deal :" , deal.getDealUniqueId());
+            if(dealRepository.existsById(deal.getId())){
+                logger.info("Duplicate deal :" , deal.getId());
                 throw new DealAlreadyExistsException("duplicate deal");
             }
             dealRepository.save(deal);
-            logger.info("Deal imported successfully",deal.getDealUniqueId());
+            logger.info("Deal imported successfully",deal.getId());
             return "Deal imported successfully";
 
     }
     
-    public String generateDealUniquId(Deal deal){
-        return deal.getFromCurrency() + "-" + deal.getToCurrency() + '-' + deal.getTimestamp().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")) + '-' + String.format("%.2f",deal.getAmount());
+//    public String generateDealUniquId(Deal deal){
+//        return deal.getFromCurrency() + "-" + deal.getToCurrency() + '-' + deal.getTimestamp().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")) + '-' + String.format("%.2f",deal.getAmount());
+//
+//    }
 
-    }
+
 
 
 }

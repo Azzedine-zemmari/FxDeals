@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Entity
 public class Deal {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -27,20 +26,17 @@ public class Deal {
     @NotNull
     private Double amount;
 
-    @Column(nullable = false,unique = true)
-    private String dealUniqueId;
 
     public Deal(){
 
     }
 
-    public Deal(Long id, String fromCurrency, String toCurrency, LocalDateTime timestamp, Double amount, String dealUniqueId) {
+    public Deal(Long id, String fromCurrency, String toCurrency, LocalDateTime timestamp, Double amount) {
         this.id = id;
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
         this.timestamp = timestamp;
         this.amount = amount;
-        this.dealUniqueId = dealUniqueId;
     }
 
     public Long getId() {
@@ -83,11 +79,4 @@ public class Deal {
         this.amount = amount;
     }
 
-    public String getDealUniqueId() {
-        return dealUniqueId;
-    }
-
-    public void setDealUniqueId(String dealUniqueId) {
-        this.dealUniqueId = dealUniqueId;
-    }
 }
