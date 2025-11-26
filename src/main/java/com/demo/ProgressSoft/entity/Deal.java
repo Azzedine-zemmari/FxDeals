@@ -1,9 +1,7 @@
 package com.demo.ProgressSoft.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -12,8 +10,8 @@ import java.time.LocalDateTime;
 @Entity
 public class Deal {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int dealId;
+    @Column(nullable = false,unique = true)
+    private String dealId;
 
     @NotNull
     @Size(min = 3, max=3)
@@ -24,12 +22,16 @@ public class Deal {
     private String toCurrency;
 
     @NotNull
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime timestamp;
 
     @NotNull
     private Double amount;
 
-    public Deal(int dealId, String fromCurrency, String toCurrency, LocalDateTime timestamp, Double amount) {
+    public Deal(){
+
+    }
+    public Deal(String dealId, String fromCurrency, String toCurrency, LocalDateTime timestamp, Double amount) {
         this.dealId = dealId;
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
@@ -37,11 +39,11 @@ public class Deal {
         this.amount = amount;
     }
 
-    public int getDealId() {
+    public String getDealId() {
         return dealId;
     }
 
-    public void setDealId(int dealId) {
+    public void setDealId(String dealId) {
         this.dealId = dealId;
     }
 

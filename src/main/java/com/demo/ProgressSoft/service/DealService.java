@@ -18,13 +18,13 @@ public class DealService implements DealServiceInterface{
     @Override
     public String importDeal(Deal deal){
         try{
-        if(dealRepository.existsByDealId(deal.getDealId())){
-            logger.info("Duplicate deal :" , deal.getDealId());
-            return "Deal already imported" + deal.getDealId();
-        }
-        dealRepository.save(deal);
-        logger.info("Deal imported successfully",deal.getDealId());
-        return "Deal imported successfully";
+            if(dealRepository.existsByDealId(deal.getDealId())){
+                logger.info("Duplicate deal :" , deal.getDealId());
+                return "Deal already imported" + deal.getDealId();
+            }
+            dealRepository.save(deal);
+            logger.info("Deal imported successfully",deal.getDealId());
+            return "Deal imported successfully";
         }catch(Exception e){
             logger.error("Erreur importing deal : ",deal.getDealId());
             return "Erreur importing deal : " + deal.getDealId();

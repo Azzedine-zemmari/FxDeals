@@ -4,5 +4,5 @@ import com.demo.ProgressSoft.entity.Deal;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DealRepository extends JpaRepository<Deal,Integer> {
-    boolean existsByDealId(int dealId);
+    boolean existsByDealId(String dealId);
 }
