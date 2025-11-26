@@ -34,6 +34,7 @@ public class DealServiceTest {
     @Test
     public void testImportDeal_Success(){
 
+        // mock input inserted by user
         DealDto dto = new DealDto();
         dto.setId(1L);
         dto.setAmount(220.1);
@@ -116,5 +117,22 @@ public class DealServiceTest {
         dto.setAmount(-300.2);
 
         assertThrows(DealInvalidException.class,()-> dealService.importDeal(dto));
+    }
+    @Test
+    public void testImportDeal_TimeStampNull(){
+        DealDto dto = new DealDto();
+        dto.setId(3L);
+        dto.setTimestamp(null);
+        dto.setFromCurrency("USD");
+        dto.setToCurrency("EUR");
+        dto.setAmount(30.2);
+
+        Deal deal = new Deal();
+
+        when(dealMapper.DealDtoToDeal(dto)).thenReturn(deal);
+        when(dealRepository.existsById(dto.getId())).thenReturn(false);
+
+        dealService.importDeal(dto);
+        assertNull(dto.getTimestamp());
     }
 }
