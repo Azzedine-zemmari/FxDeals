@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+
 import static org.mockito.Mockito.when;
 
 //@ExtendWith(MockitoExtension.class)
@@ -23,7 +25,9 @@ import static org.mockito.Mockito.when;
 //    public void testImportDeal(){
 //
 //        Deal deal = new Deal();
-//        deal.setDealId(1L);
+//        deal.setId(1L);
+//        deal.setAmount(220.1);
+//        deal.setTimestamp(LocalDateTime.now());
 //
 //        when(dealRepository.existsByDealId(deal.getDealId())).thenReturn()
 //

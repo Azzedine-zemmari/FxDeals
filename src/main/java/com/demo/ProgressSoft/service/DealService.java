@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Service
@@ -21,12 +22,12 @@ public class DealService implements DealServiceInterface{
 
     @Override
     public String importDeal(Deal deal){
-
+            if (deal.getTimestamp() == null) {
+                deal.setTimestamp(LocalDateTime.now());
+            }
             if (deal.getDealUniqueId() == null || deal.getDealUniqueId().isEmpty()) {
                 deal.setDealUniqueId(generateDealUniquId(deal));
             }
-
-            logger.info("deal" + deal);
             if(dealRepository.existsByDealUniqueId(deal.getDealUniqueId())){
                 logger.info("Duplicate deal :" , deal.getDealUniqueId());
                 throw new DealAlreadyExistsException("duplicate deal");

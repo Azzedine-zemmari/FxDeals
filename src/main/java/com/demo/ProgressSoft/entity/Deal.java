@@ -21,8 +21,7 @@ public class Deal {
     @Size(min=3,max=3)
     private String toCurrency;
 
-    @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
     private LocalDateTime timestamp;
 
     @NotNull
