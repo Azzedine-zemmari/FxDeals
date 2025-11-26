@@ -1,5 +1,6 @@
 package com.demo.ProgressSoft.controller;
 
+import com.demo.ProgressSoft.dto.DealDto;
 import com.demo.ProgressSoft.entity.Deal;
 import com.demo.ProgressSoft.service.DealService;
 import jakarta.validation.Valid;
@@ -18,7 +19,7 @@ public class DealController {
     }
 
     @PostMapping("/deal")
-    public ResponseEntity<String> creatDeal(@Valid @RequestBody Deal importedDeal){
+    public ResponseEntity<String> creatDeal(@Valid @RequestBody DealDto importedDeal){
         String deal =  dealService.importDeal(importedDeal);
         return ResponseEntity.ok(deal);
     }
