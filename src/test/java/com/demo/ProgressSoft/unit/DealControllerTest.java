@@ -49,4 +49,20 @@ public class DealControllerTest {
                 .andExpect(content().string("Deal imported successfully"));
 
     }
+    @Test
+    void createDeal_badRequest() throws Exception{
+        DealDto dto = new DealDto();
+        dto.setTimestamp(LocalDateTime.now());
+        dto.setFromCurrency("USD");
+        dto.setToCurrency("EUR");
+        dto.setAmount(300.2);
+
+        Mockito.when(dealService.importDeal(dto)).thenReturn("id is required");
+
+        mockMvc.perform(post("/api/v1/deal")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto))
+        ).andExpect(status().isBadRequest())
+                .andExpect(content().string("id is required"));
+    }
 }
