@@ -2,6 +2,7 @@ package com.demo.ProgressSoft.unit;
 
 import com.demo.ProgressSoft.dto.DealDto;
 import com.demo.ProgressSoft.entity.Deal;
+import com.demo.ProgressSoft.exception.DealInvalidException;
 import com.demo.ProgressSoft.mapper.DealMapper;
 import com.demo.ProgressSoft.repository.DealRepository;
 import com.demo.ProgressSoft.service.DealService;
@@ -54,6 +55,15 @@ public class DealServiceTest {
         verify(dealRepository).save(deal);
         assertEquals("Deal imported successfully" , result);
     }
-//    public void testImportDeal_
+    public void testImportDeal_idNull_throwsDealInvalidException(){
+        DealDto dto = new DealDto();
+        dto.setId(null);
+        dto.setAmount(220.1);
+        dto.setTimestamp(LocalDateTime.now());
+        dto.setFromCurrency("USD");
+        dto.setToCurrency("EUR");
+
+        assertThrows(DealInvalidException.class , ()-> dealService.importDeal(dto));
+    }
 
 }
