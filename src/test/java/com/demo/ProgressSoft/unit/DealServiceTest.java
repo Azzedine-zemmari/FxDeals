@@ -1,6 +1,8 @@
 package com.demo.ProgressSoft.unit;
 
+import com.demo.ProgressSoft.dto.DealDto;
 import com.demo.ProgressSoft.entity.Deal;
+import com.demo.ProgressSoft.mapper.DealMapper;
 import com.demo.ProgressSoft.repository.DealRepository;
 import com.demo.ProgressSoft.service.DealService;
 import org.junit.jupiter.api.Test;
@@ -20,27 +22,38 @@ public class DealServiceTest {
     @Mock
     private DealRepository dealRepository;
 
+    @Mock
+    private DealMapper dealMapper;
+
     @InjectMocks
     private DealService dealService;
 
-//    @Test
-//    public void testImportDeal_Success(){
-//
-//        Deal deal = new Deal();
-//        deal.setId(1L);
-//        deal.setAmount(220.1);
-//        deal.setTimestamp(LocalDateTime.now());
-//        deal.setFromCurrency("USA");
-//        deal.setToCurrency("EUR");
-//
-//        when(dealRepository.existsById(deal.getId())).thenReturn(false);
-//        when(dealRepository.save(any(Deal.class))).thenReturn(deal);
-//
-//        String result = dealService.importDeal(deal);
-//
-//        assertEquals("Deal imported successfully" , result);
-//        verify(dealRepository,times(1)).save(deal);
-//    }
+    @Test
+    public void testImportDeal_Success(){
+
+        DealDto dto = new DealDto();
+        dto.setId(1L);
+        dto.setAmount(220.1);
+        dto.setTimestamp(LocalDateTime.now());
+        dto.setFromCurrency("USD");
+        dto.setToCurrency("EUR");
+
+        //mock mapping
+        Deal deal = new Deal();
+        deal.setId(dto.getId());
+        deal.setAmount(dto.getAmount());
+        deal.setTimestamp(dto.getTimestamp());
+        deal.setFromCurrency(dto.getFromCurrency());
+        deal.setToCurrency(dto.getToCurrency());
+
+        when(dealMapper.DealDtoToDeal(dto)).thenReturn(deal);
+        when(dealRepository.existsById(deal.getId())).thenReturn(false);
+
+        String result = dealService.importDeal(dto);
+
+        verify(dealRepository).save(deal);
+        assertEquals("Deal imported successfully" , result);
+    }
 //    public void testImportDeal_
 
 }

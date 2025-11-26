@@ -43,6 +43,10 @@ public class DealService implements DealServiceInterface{
                 throw new InvalidCurrencyException("From Currency to Currency it can 't be the same");
             }
 
+            if(dealDto.getAmount() <=0){
+                throw new DealInvalidException("amount should be positive");
+            }
+
             Deal deal = dealMapper.DealDtoToDeal(dealDto);
             if(deal.getTimestamp() == null){
                 deal.setTimestamp(LocalDateTime.now());
