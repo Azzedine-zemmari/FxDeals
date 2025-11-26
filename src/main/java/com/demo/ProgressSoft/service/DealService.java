@@ -1,6 +1,8 @@
 package com.demo.ProgressSoft.service;
 
 import com.demo.ProgressSoft.entity.Deal;
+import com.demo.ProgressSoft.exception.DealAlreadyExistsException;
+import com.demo.ProgressSoft.exception.DealInvalidException;
 import com.demo.ProgressSoft.repository.DealRepository;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -20,14 +22,14 @@ public class DealService implements DealServiceInterface{
         try{
             if(dealRepository.existsByDealId(deal.getDealId())){
                 logger.info("Duplicate deal :" , deal.getDealId());
-                return "Deal already imported" + deal.getDealId();
+                throw new DealAlreadyExistsException("duplicate deal");
             }
             dealRepository.save(deal);
             logger.info("Deal imported successfully",deal.getDealId());
             return "Deal imported successfully";
         }catch(Exception e){
             logger.error("Erreur importing deal : ",deal.getDealId());
-            return "Erreur importing deal : " + deal.getDealId();
+            throw new DealInvalidException("erreur importing deal ");
         }
     }
 

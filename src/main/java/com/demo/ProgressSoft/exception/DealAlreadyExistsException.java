@@ -1,7 +1,7 @@
 package com.demo.ProgressSoft.exception;
 
-public class handleDealAlreadyExistsException extends RuntimeException {
-    public handleDealAlreadyExistsException(String message) {
+public class DealAlreadyExistsException extends RuntimeException {
+    public DealAlreadyExistsException(String message) {
         super(message);
     }
 }
