@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 @Entity
 public class Deal {
     @Id
-    @Column(nullable = false,unique = true)
-    private String dealId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
     @Size(min = 3, max=3)
@@ -22,29 +22,34 @@ public class Deal {
     private String toCurrency;
 
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime timestamp;
 
     @NotNull
     private Double amount;
 
+    @Column(nullable = false,unique = true)
+    private String dealUniqueId;
+
     public Deal(){
 
     }
-    public Deal(String dealId, String fromCurrency, String toCurrency, LocalDateTime timestamp, Double amount) {
-        this.dealId = dealId;
+
+    public Deal(Long id, String fromCurrency, String toCurrency, LocalDateTime timestamp, Double amount, String dealUniqueId) {
+        this.id = id;
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
         this.timestamp = timestamp;
         this.amount = amount;
+        this.dealUniqueId = dealUniqueId;
     }
 
-    public String getDealId() {
-        return dealId;
+    public Long getId() {
+        return id;
     }
 
-    public void setDealId(String dealId) {
-        this.dealId = dealId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFromCurrency() {
@@ -77,5 +82,13 @@ public class Deal {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public String getDealUniqueId() {
+        return dealUniqueId;
+    }
+
+    public void setDealUniqueId(String dealUniqueId) {
+        this.dealUniqueId = dealUniqueId;
     }
 }
