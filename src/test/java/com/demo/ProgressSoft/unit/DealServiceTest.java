@@ -106,4 +106,15 @@ public class DealServiceTest {
         assertThrows(InvalidCurrencyException.class, ()-> dealService.importDeal(dto));
 
     }
+    @Test
+    public void testImportDeal_NegativeAmout_throwsDealInvalidException(){
+        DealDto dto = new DealDto();
+        dto.setId(2L);
+        dto.setTimestamp(LocalDateTime.now());
+        dto.setFromCurrency("USD");
+        dto.setToCurrency("EUR");
+        dto.setAmount(-300.2);
+
+        assertThrows(DealInvalidException.class,()-> dealService.importDeal(dto));
+    }
 }
