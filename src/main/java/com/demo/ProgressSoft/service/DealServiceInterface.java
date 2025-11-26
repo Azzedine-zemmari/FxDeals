@@ -1,4 +1,4 @@
 package com.demo.ProgressSoft.service;
 
-public interface DealServiceInterface {
+public interface DealServiceInterface{
 }
