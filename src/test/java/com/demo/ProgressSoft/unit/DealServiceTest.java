@@ -4,6 +4,7 @@ import com.demo.ProgressSoft.dto.DealDto;
 import com.demo.ProgressSoft.entity.Deal;
 import com.demo.ProgressSoft.exception.DealAlreadyExistsException;
 import com.demo.ProgressSoft.exception.DealInvalidException;
+import com.demo.ProgressSoft.exception.InvalidCurrencyException;
 import com.demo.ProgressSoft.mapper.DealMapper;
 import com.demo.ProgressSoft.repository.DealRepository;
 import com.demo.ProgressSoft.service.DealService;
@@ -82,5 +83,15 @@ public class DealServiceTest {
         assertThrows(DealAlreadyExistsException.class,()-> dealService.importDeal(dto));
     }
 
+    @Test
+    public void testImportDeal_CurrencyValidator_throwsInvalidCurrencyException(){
+        DealDto dto = new DealDto();
+        dto.setId(2L);
+        dto.setAmount(220.1);
+        dto.setTimestamp(LocalDateTime.now());
+        dto.setFromCurrency("XYZ");
+        dto.setToCurrency("EUR");
 
+        assertThrows(InvalidCurrencyException.class , ()-> dealService.importDeal(dto));
+    }
 }
