@@ -37,6 +37,11 @@ public class CustomExceptionHandler {
         ApiErreur apiErreur = new ApiErreur(404, LocalDateTime.now() , e.getMessage());
         return new ResponseEntity<>(apiErreur, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(InvalidCurrencyException.class)
+    public ResponseEntity<ApiErreur> handleInvalidCurrencyException(InvalidCurrencyException e){
+        ApiErreur apiErreur = new ApiErreur(400,LocalDateTime.now(),e.getMessage());
+        return new ResponseEntity<>(apiErreur,HttpStatus.BAD_REQUEST);
+    }
 
 
 }
