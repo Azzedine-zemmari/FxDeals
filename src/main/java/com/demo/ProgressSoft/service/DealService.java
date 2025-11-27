@@ -28,7 +28,8 @@ public class DealService implements DealServiceInterface{
     @Override
     public String importDeal(DealDto dealDto){
             if (dealDto.getId() == null) {
-               throw new DealInvalidException("id is required");
+                logger.info("Id is required :");
+                throw new DealInvalidException("id is required");
             }
 
             if(dealRepository.existsById(dealDto.getId())){
@@ -40,10 +41,12 @@ public class DealService implements DealServiceInterface{
             CurrencyValidator.currencyValidate(dealDto.getToCurrency());
 
             if(dealDto.getFromCurrency().equals(dealDto.getToCurrency())){
+                logger.error("From Currency to Currency it can 't be the same");
                 throw new InvalidCurrencyException("From Currency to Currency it can 't be the same");
             }
 
             if(dealDto.getAmount() <=0){
+                logger.error("amount should be positive");
                 throw new DealInvalidException("amount should be positive");
             }
 
