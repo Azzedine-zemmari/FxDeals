@@ -3,7 +3,7 @@
 ## Project Overview
 **ClusteredData Warehouse** is a data warehouse application designed to help Bloomberg analyze FX deals. The system accepts FX deal details, validates them, and persists them in a database. It ensures no duplicate deals are imported and maintains all successfully imported data without rollback.
 
-This project is implemented as a Maven-based Java application, fully containerized using Docker Compose for easy deployment.
+This project is implemented as a Maven-based Spring-boot application, fully containerized using Docker Compose for easy deployment.
 
 ---
 
