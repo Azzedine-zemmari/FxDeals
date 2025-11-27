@@ -27,14 +27,14 @@ This project is implemented as a Maven-based Spring-boot application, fully cont
 ---
 
 ## Tech Stack
-- **Language:** Java
-- **FrameWork:** Spring
-- **Build Tool:** Maven
-- **Database:**  MySQL
-- **Containerization:** Docker, Docker Compose
-- **Testing:** JUnit, Mockito, JaCoCo
-- **Logging:** SLF4J
-- **Version Control:** GitHub
+- Java
+- Spring boot
+- Maven
+- MySQL
+- Docker, Docker Compose
+-  JUnit, Mockito, JaCoCo
+-  SLF4J
+-  GitHub
 
 ---
 
