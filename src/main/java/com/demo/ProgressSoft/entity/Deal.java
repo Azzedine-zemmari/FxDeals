@@ -12,18 +12,16 @@ public class Deal {
     @Id
     private Long id;
 
-    @NotNull
-    @Size(min = 3, max=3)
+
     private String fromCurrency;
 
-    @NotNull
-    @Size(min=3,max=3)
+
     private String toCurrency;
 
 
     private LocalDateTime timestamp;
 
-    @NotNull
+
     private Double amount;
 
 
