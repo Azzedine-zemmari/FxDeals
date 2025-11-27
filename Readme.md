@@ -32,7 +32,7 @@ This project is implemented as a Maven-based Java application, fully containeriz
 - **Build Tool:** Maven
 - **Database:**  MySQL
 - **Containerization:** Docker, Docker Compose
-- **Testing:** JUnit
+- **Testing:** JUnit, Mockito, JaCoCo
 - **Logging:** SLF4J
 - **Version Control:** GitHub
 
