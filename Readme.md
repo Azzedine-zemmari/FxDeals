@@ -53,15 +53,20 @@ git clone https://github.com/Azzedine-zemmari/FxDeals.git
 ```
 
 2. **Start the database and application using makeFile:**
+- **option1**: use makeFile
 ```bash
 make start-app
+```
+- **option2** using docker : 
+```bash
+ docker compose up --build
 ```
 3. **To run test**
 ```bash
 make test
 ```
 ## The endpoint to test the project 
-http://localhost:8090/api/v1/deal
+POST : http://localhost:8090/api/v1/deal
 - Request fields : example
 ```json
 {
