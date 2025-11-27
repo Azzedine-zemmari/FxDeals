@@ -1,0 +1,35 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: progressoft-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: deal_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - progres-net
+
+  app:
+    image: docker.io/azzedine122/progresssoft-app
+    container_name: deal-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/deal_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: userpass
+    depends_on:
+      - mysql
+    ports:
+      - "8090:8080"
+    networks:
+      - progres-net
+
+networks:
+  progres-net:
+
+volumes:
+  mysql_data:
